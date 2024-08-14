@@ -48,37 +48,56 @@ main {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 20%;
+  height: 30%;
 }
 
 .card-2 {
   display: flex;
   justify-content: space-around;
-  height: 80%;
+  height: 70%;
   padding-top: 2%;
   width: 100%;
 }
 
-.history{
+.history {
   border-right: 1px solid white;
   width: 50%;
   text-align: center;
 }
 
-.contact{
+.contact {
   width: 50%;
   text-align: center;
 }
 
 .input {
-  height: 50%;
+  height: 70%;
 }
 
 input {
   list-style: none;
   outline: none;
-  height: 100%;
+  height: 50%;
   text-align: center;
   border-radius: 20px;
   font-weight: bold;
+}
+
+.phoneNumber {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5%;
+}
+
+.phoneNumber button {
+  width: 90%;
+  border-radius: 10px;
+  height: 35%;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.phoneNumber button i {
+  padding-right: 3px;
 }

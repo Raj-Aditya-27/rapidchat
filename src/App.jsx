@@ -5,20 +5,26 @@ function App() {
   return (
     <div className="container">
       <nav>
-        <div><i class="bi bi-whatsapp"></i>RapidChat</div>
-        <div><i class="bi bi-moon-stars"></i>Theme</div>
+        <div>
+          <i class="bi bi-whatsapp"></i>RapidChat
+        </div>
+        <div>
+          <i class="bi bi-moon-stars"></i>Theme
+        </div>
       </nav>
       <main>
         <div className="card">
           <div className="card-1">
-            <div className="input">
+            {/* <div className="input">
               <input type="text" placeholder="Country Code" />
-            </div>
-            <div className="input">
+            </div> */}
+            <div className="input phoneNumber">
               <input type="text" placeholder="Phone Number" />
+              <button><i class="bi bi-whatsapp"></i>Chat on Watsapp</button>
             </div>
-            <div className="input">
+            <div className="input phoneNumber">
               <input type="text" placeholder="User Name" />
+              <button>Save</button>
             </div>
           </div>
           <div className="card-2">
