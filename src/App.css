@@ -41,13 +41,12 @@ main {
   height: 75vh;
   display: flex;
   background-color: #000000;
-  flex-wrap: wrap;
   padding: 1%;
   gap: 1%;
 }
 
 .card-1 {
-  border: 1px solid #3D3D3D;
+  border: 1px solid #3d3d3d;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +67,7 @@ main {
 .history {
   width: 50%;
   text-align: center;
-  border: 1px solid #3D3D3D;
+  border: 1px solid #3d3d3d;
   border-radius: 10px;
   height: 100%;
 }
@@ -121,7 +120,7 @@ a {
 /* CSS */
 button {
   /* background: #5e5df0; */
-  background: #7366FF;
+  background: #7366ff;
   border-radius: 999px;
   box-sizing: border-box;
   color: #ffffff;
@@ -141,10 +140,8 @@ button {
   text-align: center;
 }
 
-
-
 .contact {
-  border: 1px solid #3D3D3D;
+  border: 1px solid #3d3d3d;
   border-radius: 10px;
   height: 100%;
 }
@@ -157,7 +154,7 @@ button {
   font-size: 16px;
   font-weight: 700;
   height: 8%;
-  border-bottom: 1px solid #3D3D3D;
+  border-bottom: 1px solid #3d3d3d;
 }
 
 .historyAndcontactHeader i {
@@ -197,4 +194,48 @@ button {
   display: flex;
   justify-content: space-around;
   width: 100%;
+}
+
+/* Responsiveness */
+@media only screen and (max-width: 576px) {
+  /* CSS rules specific for extra small screens */
+  nav {
+    justify-content: space-around;
+  }
+
+  .card {
+    flex-direction: column;
+    height: 90%;
+    width: 96%;
+  }
+  .card-1 {
+    width: 100%;
+  }
+
+  input {
+    height: 50%;
+  }
+
+  .phoneNumber button {
+    height: 50%;
+  }
+
+  .historyElement {
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  .contactElement {
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .contactElementNameAndNumber {
+    width: 80%;
+    font-size: 13px;
+  }
+
+  .contactElementNameAndNumber a {
+    justify-content: space-evenly;
+  }
 }
