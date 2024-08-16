@@ -236,8 +236,13 @@ function App() {
                         onClick={onChat}
                         target="_blank"
                       >
-                        <i className="bi bi-whatsapp"></i>
-                        <div>{`${element.name}`}</div>
+                        <div>
+                          <i
+                            className="bi bi-whatsapp"
+                            style={{ marginRight: "5px" }}
+                          ></i>
+                          {`${element.name}`}
+                        </div>
                         <div>{`${element.number}`}</div>
                       </a>
                     </div>
