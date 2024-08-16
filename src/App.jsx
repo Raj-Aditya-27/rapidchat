@@ -4,15 +4,17 @@ import "./App.css";
 function App() {
   const [number, setNumber] = useState("");
   const [countryCode, setCountryCode] = useState("");
+  const [name, setName] = useState("");
   const [valid, setValid] = useState(false);
-  const [previousNumber, setPreviousNumber] = useState(
-    localStorage.getItem("previousNumber")
-  );
   const [contactHistory, setContactHistory] = useState([]);
+  const [yourContacts, setYourContacts] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("history")) {
       setContactHistory(JSON.parse(localStorage.getItem("history")));
+    }
+    if (localStorage.getItem("savedContacts")) {
+      setYourContacts(JSON.parse(localStorage.getItem("savedContacts")));
     }
   }, []);
 
@@ -27,8 +29,6 @@ function App() {
 
   function onChat() {
     saveHistory();
-    localStorage.setItem("previousNumber", countryCode + number);
-    setPreviousNumber(number); // Update state to reflect history in real-time
   }
 
   function saveHistory() {
@@ -50,6 +50,30 @@ function App() {
       localStorage.setItem("history", JSON.stringify(newHistory));
       setContactHistory(newHistory); // Update state with new history
     }
+  }
+
+  function saveContact() {
+    let savedContacts = localStorage.getItem("savedContacts");
+    if (savedContacts) {
+      let savedContactsArray = JSON.parse(savedContacts);
+      console.log(savedContactsArray);
+      savedContactsArray.push({
+        name: name,
+        number: countryCode + number,
+      });
+      localStorage.setItem("savedContacts", JSON.stringify(savedContactsArray));
+    } else {
+      localStorage.setItem(
+        "savedContacts",
+        JSON.stringify([
+          {
+            name: name,
+            number: countryCode + number,
+          },
+        ])
+      );
+    }
+    setYourContacts(JSON.parse(localStorage.getItem("savedContacts")));
   }
 
   return (
@@ -97,13 +121,29 @@ function App() {
               </button>
             </div>
             <div className="input phoneNumber">
-              <input type="text" placeholder="User Name" />
-              <button>Save</button>
+              <input
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                type="text"
+                placeholder="User Name"
+              />
+              <button
+                disabled={!valid || name == ""}
+                style={{
+                  cursor: !valid || name == "" ? "not-allowed" : "pointer", // Corrected cursor styles
+                }}
+                onClick={saveContact}
+              >
+                Save
+              </button>
             </div>
           </div>
           <div className="card-2">
             <div className="history">
-              <p>History</p>
+              <p>History <i onClick={()=>{
+                localStorage.setItem("history",'[]');
+                setContactHistory([]);
+              }} class="bi bi-trash"></i></p>
               {contactHistory.map((element, index) => {
                 return (
                   <a
@@ -117,7 +157,25 @@ function App() {
                 );
               })}
             </div>
-            <div className="contact">Contact</div>
+            <div className="contact">
+              <p>Contact <i onClick={()=>{
+                localStorage.setItem("savedContacts",'[]');
+                setYourContacts([]);
+              }}  class="bi bi-trash"></i></p>
+              {yourContacts.map((element, index) => {
+                return (
+                  <a
+                    href={`http://wa.me/${element.number}`}
+                    onClick={onChat}
+                    target="_blank"
+                    key={index}
+                  >
+                    {`Name: ${element.name}`}
+                    {`Number: ${element.number}`}
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </div>
       </main>
