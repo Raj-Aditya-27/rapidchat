@@ -141,18 +141,22 @@ function App() {
                 value={number}
               />
               <button
-                disabled={!valid}
+                disabled={!valid || countryCode == ""}
                 style={{
-                  cursor: !valid ? "not-allowed" : "pointer", // Corrected cursor styles
+                  cursor:
+                    !valid || countryCode == "" ? "not-allowed" : "pointer", // Corrected cursor styles
                 }}
               >
                 <a
                   onClick={onChat}
                   target="_blank"
                   href={`http://wa.me/${countryCode + number}`}
-                  style={{ pointerEvents: !valid ? "none" : "auto" }}
+                  style={{
+                    pointerEvents:
+                      !valid || countryCode == "" ? "none" : "auto",
+                  }}
                 >
-                  <i className="bi bi-whatsapp"></i>Chat on WhatsApp
+                  <i className="bi bi-whatsapp"></i>Chat
                 </a>
               </button>
             </div>
@@ -179,7 +183,7 @@ function App() {
           {/* history, contact */}
           <div className="card-2">
             <div className="history">
-              <p>
+              <div className="historyAndcontactHeader">
                 History{" "}
                 <i
                   onClick={() => {
@@ -188,10 +192,10 @@ function App() {
                   }}
                   className="bi bi-trash"
                 ></i>
-              </p>
+              </div>
               {contactHistory.map((element, index) => {
                 return (
-                  <div key={index}>
+                  <div key={index} className="historyElement">
                     <div>
                       <a href={`http://wa.me/${element}`} target="_blank">
                         <i className="bi bi-whatsapp"></i>
@@ -200,6 +204,7 @@ function App() {
                     </div>
                     <div>
                       <i
+                        style={{ cursor: "pointer" }}
                         onClick={() => {
                           deleteHistory(element);
                         }}
@@ -210,9 +215,9 @@ function App() {
                 );
               })}
             </div>
-            
+
             <div className="contact">
-              <p>
+              <div className="historyAndcontactHeader">
                 Contact{" "}
                 <i
                   onClick={() => {
@@ -221,18 +226,19 @@ function App() {
                   }}
                   className="bi bi-trash"
                 ></i>
-              </p>
+              </div>
               {yourContacts.map((element, index) => {
                 return (
-                  <div key={index}>
-                    <div>
+                  <div key={index} className="contactElement">
+                    <div className="contactElementNameAndNumber">
                       <a
                         href={`http://wa.me/${element.number}`}
                         onClick={onChat}
                         target="_blank"
                       >
-                        {`Name: ${element.name}`}
-                        {`Number: ${element.number}`}
+                        <i className="bi bi-whatsapp"></i>
+                        <div>{`${element.name}`}</div>
+                        <div>{`${element.number}`}</div>
                       </a>
                     </div>
                     <div>
@@ -241,6 +247,7 @@ function App() {
                           deleteContact(element.name);
                         }}
                         className="bi bi-trash"
+                        style={{ cursor: "pointer" }}
                       ></i>
                     </div>
                   </div>

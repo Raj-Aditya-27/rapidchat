@@ -3,6 +3,7 @@
   min-height: 100vh;
   width: 100vw;
   background-color: #121212;
+  /* background-color: #5e5df0; */
   color: white;
 }
 
@@ -39,30 +40,37 @@ main {
   width: 80%;
   height: 75vh;
   display: flex;
-  flex-direction: column;
   background-color: #000000;
+  flex-wrap: wrap;
+  padding: 1%;
+  gap: 1%;
 }
 
 .card-1 {
-  border-bottom: 1px solid white;
+  border: 1px solid #3D3D3D;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-  height: 30%;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 40%;
+  border-radius: 10px;
 }
 
 .card-2 {
   display: flex;
   justify-content: space-around;
-  height: 70%;
-  padding-top: 2%;
-  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  gap: 1%;
 }
 
 .history {
-  border-right: 1px solid white;
   width: 50%;
   text-align: center;
+  border: 1px solid #3D3D3D;
+  border-radius: 10px;
+  height: 100%;
 }
 
 .contact {
@@ -71,33 +79,122 @@ main {
 }
 
 .input {
-  height: 70%;
+  height: 33%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 input {
   list-style: none;
   outline: none;
-  height: 50%;
+  height: 30%;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 10px;
   font-weight: bold;
 }
 
 .phoneNumber {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 5%;
 }
 
 .phoneNumber button {
-  width: 90%;
+  width: 30%;
   border-radius: 10px;
-  height: 35%;
+  height: 30%;
   cursor: pointer;
   font-weight: bold;
 }
 
 .phoneNumber button i {
   padding-right: 3px;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* CSS */
+button {
+  /* background: #5e5df0; */
+  background: #7366FF;
+  border-radius: 999px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+  text-align: center;
+}
+
+
+
+.contact {
+  border: 1px solid #3D3D3D;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.historyAndcontactHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  height: 8%;
+  border-bottom: 1px solid #3D3D3D;
+}
+
+.historyAndcontactHeader i {
+  cursor: pointer;
+}
+
+.historyElement {
+  border-radius: 10px;
+  margin: 0 1%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 8%;
+}
+
+.historyElement a i {
+  padding-right: 5px;
+}
+
+.contactElement {
+  border-radius: 10px;
+  margin: 0 1%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 8%;
+}
+
+.contactElementNameAndNumber {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 70%;
+}
+
+.contactElementNameAndNumber a {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
