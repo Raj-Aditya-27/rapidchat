@@ -226,11 +226,15 @@ button {
 
   .historyElement {
     justify-content: space-around;
+    padding: 5%;
+    margin-top: 2%;
   }
 
   .contactElement {
     justify-content: space-between;
     align-items: center;
+    padding: 5%;
+    margin-top: 2%;
   }
 
   .contactElementNameAndNumber {
