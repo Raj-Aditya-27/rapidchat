@@ -122,7 +122,7 @@ function App() {
           <i className="bi bi-whatsapp"></i>RapidChat
         </div>
         <div onClick={toggleBgColor}>
-          <i className="bi bi-moon-stars"></i>Theme
+          <i className="bi bi-moon-stars"></i>
         </div>
       </nav>
 

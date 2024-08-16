@@ -169,7 +169,7 @@ button {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 8%;
+  height: 12%;
   border-bottom: 1px solid gray;
 }
 
@@ -206,7 +206,7 @@ button {
 @media only screen and (max-width: 576px) {
   /* CSS rules specific for extra small screens */
   nav {
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   .card {
@@ -230,6 +230,9 @@ button {
     justify-content: space-around;
     padding: 5%;
     margin-top: 2%;
+    font-size: 13px;
+    height: 14%;
+    font-weight: 600;
   }
 
   .contactElement {
@@ -237,6 +240,9 @@ button {
     align-items: center;
     padding: 5%;
     margin-top: 2%;
+    font-size: 13px;
+    height: 14%;
+    font-weight: 600;
   }
 
   .contactElementNameAndNumber {
@@ -249,5 +255,42 @@ button {
 
   nav{
     font-size: 1.4rem;
+  }
+}
+
+
+@media only screen and (min-width: 577px) and (max-width: 1024px) {
+  /* CSS rules specific for small screens */
+  nav {
+    justify-content: space-between;
+  }
+
+  .card {
+    flex-direction: column;
+    height: 90%;
+    width: 90%;
+  }
+  .card-1 {
+    width: 100%;
+  }
+
+  input {
+    height: 40%;
+  }
+
+  .phoneNumber button {
+    height: 40%;
+  }
+
+  .historyElement {
+    height: 20%;
+  }
+
+  .contactElement {
+   height: 20%;
+  }
+
+  .historyAndcontactHeader{
+    height: 20%;
   }
 }
