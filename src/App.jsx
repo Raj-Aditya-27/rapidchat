@@ -3,10 +3,15 @@ import "./App.css";
 
 function App() {
   const [number, setNumber] = useState("");
+  const [countryCode,setCountryCode]=useState("");
   const [valid, setValid] = useState(false);
   const [previousNumber, setPreviousNumber] = useState(
     localStorage.getItem("previousNumber")
   );
+
+  function handleCountryCode(event){
+    setCountryCode(event.target.value);
+  }
 
   function handleOnChange(event) {
     setNumber(event.target.value);
@@ -14,7 +19,7 @@ function App() {
   }
 
   function onChat() {
-    localStorage.setItem("previousNumber", number);
+    localStorage.setItem("previousNumber", countryCode+number);
     setPreviousNumber(number); // Update state to reflect history in real-time
   }
 
@@ -32,7 +37,7 @@ function App() {
         <div className="card">
           <div className="card-1">
             <div className="input">
-              <input type="text" placeholder="Country Code" />
+              <input onChange={handleCountryCode} value={countryCode} type="text" placeholder="Country Code" />
             </div>
             <div className="input phoneNumber">
               <input
@@ -50,7 +55,7 @@ function App() {
                 <a
                   onClick={onChat}
                   target="_blank"
-                  href={`http://wa.me/91${number}`}
+                  href={`http://wa.me/${countryCode+number}`}
                   style={{ pointerEvents: !valid ? "none" : "auto" }}
                 >
                   <i className="bi bi-whatsapp"></i>Chat on WhatsApp
