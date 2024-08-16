@@ -1,26 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
   const [number, setNumber] = useState("");
-  const [countryCode,setCountryCode]=useState("");
+  const [countryCode, setCountryCode] = useState("");
   const [valid, setValid] = useState(false);
   const [previousNumber, setPreviousNumber] = useState(
     localStorage.getItem("previousNumber")
   );
+  const [contactHistory, setContactHistory] = useState([]);
 
-  function handleCountryCode(event){
+  useEffect(() => {
+    if (localStorage.getItem("history")) {
+      setContactHistory(JSON.parse(localStorage.getItem("history")));
+    }
+  }, []);
+
+  function handleCountryCode(event) {
     setCountryCode(event.target.value);
   }
 
-  function handleOnChange(event) {
+  function handlePhoneNumber(event) {
     setNumber(event.target.value);
     setValid(event.target.value.length === 10);
   }
 
   function onChat() {
-    localStorage.setItem("previousNumber", countryCode+number);
+    saveHistory();
+    localStorage.setItem("previousNumber", countryCode + number);
     setPreviousNumber(number); // Update state to reflect history in real-time
+  }
+
+  function saveHistory() {
+    let currentHistory = localStorage.getItem("history");
+
+    // Check if currentHistory exists and is a valid JSON string
+    if (currentHistory) {
+      try {
+        let historyArray = JSON.parse(currentHistory); // Parse the JSON string
+        historyArray.push(countryCode + number); // Add the new number
+        localStorage.setItem("history", JSON.stringify(historyArray)); // Save it back as a JSON string
+        setContactHistory(historyArray); // Update state with new history
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    } else {
+      // Initialize with a new array and save as a JSON string
+      const newHistory = [countryCode + number];
+      localStorage.setItem("history", JSON.stringify(newHistory));
+      setContactHistory(newHistory); // Update state with new history
+    }
   }
 
   return (
@@ -37,11 +66,16 @@ function App() {
         <div className="card">
           <div className="card-1">
             <div className="input">
-              <input onChange={handleCountryCode} value={countryCode} type="text" placeholder="Country Code" />
+              <input
+                onChange={handleCountryCode}
+                value={countryCode}
+                type="text"
+                placeholder="Country Code"
+              />
             </div>
             <div className="input phoneNumber">
               <input
-                onChange={handleOnChange}
+                onChange={handlePhoneNumber}
                 type="text"
                 placeholder="Phone Number"
                 value={number}
@@ -55,7 +89,7 @@ function App() {
                 <a
                   onClick={onChat}
                   target="_blank"
-                  href={`http://wa.me/${countryCode+number}`}
+                  href={`http://wa.me/${countryCode + number}`}
                   style={{ pointerEvents: !valid ? "none" : "auto" }}
                 >
                   <i className="bi bi-whatsapp"></i>Chat on WhatsApp
@@ -70,7 +104,18 @@ function App() {
           <div className="card-2">
             <div className="history">
               <p>History</p>
-              <p>{previousNumber}</p>
+              {contactHistory.map((element, index) => {
+                return (
+                  <a
+                    href={`http://wa.me/${element}`}
+                    target="_blank"
+                    key={index}
+                  >
+                    <i className="bi bi-whatsapp"></i>
+                    {`${element}`}
+                  </a>
+                );
+              })}
             </div>
             <div className="contact">Contact</div>
           </div>
