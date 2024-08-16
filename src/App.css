@@ -210,7 +210,7 @@ button {
   .card {
     flex-direction: column;
     height: 90%;
-    width: 96%;
+    width: 98%;
   }
   .card-1 {
     width: 100%;
@@ -225,8 +225,7 @@ button {
   }
 
   .historyElement {
-    justify-content: center;
-    font-size: 13px;
+    justify-content: space-around;
   }
 
   .contactElement {
@@ -236,7 +235,6 @@ button {
 
   .contactElementNameAndNumber {
     width: 80%;
-    font-size: 13px;
   }
 
   .contactElementNameAndNumber a {
