@@ -3,26 +3,29 @@ import "./App.css";
 
 function App() {
   const [number, setNumber] = useState("");
+  const [valid, setValid] = useState(false);
   const [previousNumber, setPreviousNumber] = useState(
     localStorage.getItem("previousNumber")
   );
 
   function handleOnChange(event) {
     setNumber(event.target.value);
+    setValid(event.target.value.length === 10);
   }
 
   function onChat() {
     localStorage.setItem("previousNumber", number);
+    setPreviousNumber(number); // Update state to reflect history in real-time
   }
 
   return (
     <div className="container">
       <nav>
         <div>
-          <i class="bi bi-whatsapp"></i>RapidChat
+          <i className="bi bi-whatsapp"></i>RapidChat
         </div>
         <div>
-          <i class="bi bi-moon-stars"></i>Theme
+          <i className="bi bi-moon-stars"></i>Theme
         </div>
       </nav>
       <main>
@@ -38,13 +41,19 @@ function App() {
                 placeholder="Phone Number"
                 value={number}
               />
-              <button>
+              <button
+                disabled={!valid}
+                style={{
+                  cursor: !valid ? "not-allowed" : "pointer", // Corrected cursor styles
+                }}
+              >
                 <a
                   onClick={onChat}
                   target="_blank"
                   href={`http://wa.me/91${number}`}
+                  style={{ pointerEvents: !valid ? "none" : "auto" }}
                 >
-                  <i class="bi bi-whatsapp"></i>Chat on Watsapp
+                  <i className="bi bi-whatsapp"></i>Chat on WhatsApp
                 </a>
               </button>
             </div>
