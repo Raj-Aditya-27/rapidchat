@@ -106,14 +106,22 @@ function App() {
     }
   }
 
+  const [bgColor, setBgColor] = useState('#1c2a18'); // Initial color
+
+  // Function to toggle the background color
+  const toggleBgColor = () => {
+    setBgColor(prevColor => (prevColor === '#1c2a18' ? '#121212' : '#1c2a18'));
+  };
+
   return (
-    <div className="container">
+    
+    <div className="container" style={{ backgroundColor: bgColor }}>
       {/* Navbar */}
       <nav>
         <div>
           <i className="bi bi-whatsapp"></i>RapidChat
         </div>
-        <div>
+        <div onClick={toggleBgColor}>
           <i className="bi bi-moon-stars"></i>Theme
         </div>
       </nav>

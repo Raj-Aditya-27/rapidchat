@@ -2,9 +2,11 @@
 .container {
   min-height: 100vh;
   width: 100vw;
-  background-color: #121212;
-  /* background-color: #5e5df0; */
+  /* background-color: #121212; */
+  background-color: #5e5df0;
+  background-color: #1c2a18;
   color: white;
+  transition: background-color 0.5s ease;
 }
 
 /* navbar */
@@ -243,5 +245,9 @@ button {
 
   .contactElementNameAndNumber a {
     justify-content: space-evenly;
+  }
+
+  nav{
+    font-size: 1.4rem;
   }
 }
