@@ -2,6 +2,12 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [number, setNumber] = useState("Phone Number");
+
+  function handleOnChange(event) {
+    setNumber(event.target.value);
+  }
+
   return (
     <div className="container">
       <nav>
@@ -15,12 +21,21 @@ function App() {
       <main>
         <div className="card">
           <div className="card-1">
-            {/* <div className="input">
+            <div className="input">
               <input type="text" placeholder="Country Code" />
-            </div> */}
+            </div>
             <div className="input phoneNumber">
-              <input type="text" placeholder="Phone Number" />
-              <button><i class="bi bi-whatsapp"></i>Chat on Watsapp</button>
+              <input
+                onChange={handleOnChange}
+                type="text"
+                placeholder="Phone Number"
+                value={number}
+              />
+              <button>
+                <a href={`http://wa.me/91${number}`}>
+                  <i class="bi bi-whatsapp"></i>Chat on Watsapp
+                </a>
+              </button>
             </div>
             <div className="input phoneNumber">
               <input type="text" placeholder="User Name" />
