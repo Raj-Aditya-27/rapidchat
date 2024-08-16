@@ -76,6 +76,30 @@ function App() {
     setYourContacts(JSON.parse(localStorage.getItem("savedContacts")));
   }
 
+  function deleteContact(contactName) {
+    let allContacts = localStorage.getItem("savedContacts");
+    if (allContacts) {
+      allContacts = JSON.parse(allContacts);
+      let remainingContacts = allContacts.filter((element, index) => {
+        return contactName != element.name;
+      });
+      localStorage.setItem("savedContacts", JSON.stringify(remainingContacts));
+      setYourContacts(JSON.parse(localStorage.getItem("savedContacts")));
+    }
+  }
+
+  function deleteHistory(contactNumber) {
+    let allContacts = localStorage.getItem("history");
+    if (allContacts) {
+      allContacts = JSON.parse(allContacts);
+      let remainingContacts = allContacts.filter((element, index) => {
+        return contactNumber != element;
+      });
+      localStorage.setItem("history", JSON.stringify(remainingContacts));
+      setContactHistory(JSON.parse(localStorage.getItem("history")));
+    }
+  }
+
   return (
     <div className="container">
       <nav>
@@ -140,39 +164,75 @@ function App() {
           </div>
           <div className="card-2">
             <div className="history">
-              <p>History <i onClick={()=>{
-                localStorage.setItem("history",'[]');
-                setContactHistory([]);
-              }} class="bi bi-trash"></i></p>
+              <p>
+                History{" "}
+                <i
+                  onClick={() => {
+                    localStorage.setItem("history", "[]");
+                    setContactHistory([]);
+                  }}
+                  class="bi bi-trash"
+                ></i>
+              </p>
               {contactHistory.map((element, index) => {
                 return (
-                  <a
-                    href={`http://wa.me/${element}`}
-                    target="_blank"
-                    key={index}
-                  >
-                    <i className="bi bi-whatsapp"></i>
-                    {`${element}`}
-                  </a>
+                  <div>
+                    <div>
+                      <a
+                        href={`http://wa.me/${element}`}
+                        target="_blank"
+                        key={index}
+                      >
+                        <i className="bi bi-whatsapp"></i>
+                        {`${element}`}
+                      </a>
+                    </div>
+                    <div>
+                      <i
+                        onClick={() => {
+                          deleteHistory(element);
+                        }}
+                        class="bi bi-trash"
+                      ></i>
+                    </div>
+                  </div>
                 );
               })}
             </div>
             <div className="contact">
-              <p>Contact <i onClick={()=>{
-                localStorage.setItem("savedContacts",'[]');
-                setYourContacts([]);
-              }}  class="bi bi-trash"></i></p>
+              <p>
+                Contact{" "}
+                <i
+                  onClick={() => {
+                    localStorage.setItem("savedContacts", "[]");
+                    setYourContacts([]);
+                  }}
+                  class="bi bi-trash"
+                ></i>
+              </p>
               {yourContacts.map((element, index) => {
                 return (
-                  <a
-                    href={`http://wa.me/${element.number}`}
-                    onClick={onChat}
-                    target="_blank"
-                    key={index}
-                  >
-                    {`Name: ${element.name}`}
-                    {`Number: ${element.number}`}
-                  </a>
+                  <div>
+                    <div>
+                      <a
+                        href={`http://wa.me/${element.number}`}
+                        onClick={onChat}
+                        target="_blank"
+                        key={index}
+                      >
+                        {`Name: ${element.name}`}
+                        {`Number: ${element.number}`}
+                      </a>
+                    </div>
+                    <div>
+                      <i
+                        onClick={() => {
+                          deleteContact(element.name);
+                        }}
+                        class="bi bi-trash"
+                      ></i>
+                    </div>
+                  </div>
                 );
               })}
             </div>
