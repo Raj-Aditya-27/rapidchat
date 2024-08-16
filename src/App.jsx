@@ -18,10 +18,12 @@ function App() {
     }
   }, []);
 
+  //Set country code
   function handleCountryCode(event) {
     setCountryCode(event.target.value);
   }
 
+  //check valid number
   function handlePhoneNumber(event) {
     setNumber(event.target.value);
     setValid(event.target.value.length === 10);
@@ -31,6 +33,7 @@ function App() {
     saveHistory();
   }
 
+  // Save individual history
   function saveHistory() {
     let currentHistory = localStorage.getItem("history");
 
@@ -52,6 +55,7 @@ function App() {
     }
   }
 
+  // Save individual contact
   function saveContact() {
     let savedContacts = localStorage.getItem("savedContacts");
     if (savedContacts) {
@@ -76,6 +80,7 @@ function App() {
     setYourContacts(JSON.parse(localStorage.getItem("savedContacts")));
   }
 
+  // Delete individual contact
   function deleteContact(contactName) {
     let allContacts = localStorage.getItem("savedContacts");
     if (allContacts) {
@@ -88,6 +93,7 @@ function App() {
     }
   }
 
+  // Delete individual history
   function deleteHistory(contactNumber) {
     let allContacts = localStorage.getItem("history");
     if (allContacts) {
@@ -102,6 +108,7 @@ function App() {
 
   return (
     <div className="container">
+      {/* Navbar */}
       <nav>
         <div>
           <i className="bi bi-whatsapp"></i>RapidChat
@@ -110,21 +117,26 @@ function App() {
           <i className="bi bi-moon-stars"></i>Theme
         </div>
       </nav>
+
+      {/* Body */}
       <main>
         <div className="card">
+          {/* country code, phone number , contact name */}
           <div className="card-1">
+            {/* country code */}
             <div className="input">
               <input
                 onChange={handleCountryCode}
                 value={countryCode}
-                type="text"
+                type="number"
                 placeholder="Country Code"
               />
             </div>
+            {/* phone number */}
             <div className="input phoneNumber">
               <input
                 onChange={handlePhoneNumber}
-                type="text"
+                type="number"
                 placeholder="Phone Number"
                 value={number}
               />
@@ -144,6 +156,7 @@ function App() {
                 </a>
               </button>
             </div>
+            {/* user name */}
             <div className="input phoneNumber">
               <input
                 value={name}
@@ -162,6 +175,8 @@ function App() {
               </button>
             </div>
           </div>
+
+          {/* history, contact */}
           <div className="card-2">
             <div className="history">
               <p>
@@ -171,18 +186,14 @@ function App() {
                     localStorage.setItem("history", "[]");
                     setContactHistory([]);
                   }}
-                  class="bi bi-trash"
+                  className="bi bi-trash"
                 ></i>
               </p>
               {contactHistory.map((element, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <div>
-                      <a
-                        href={`http://wa.me/${element}`}
-                        target="_blank"
-                        key={index}
-                      >
+                      <a href={`http://wa.me/${element}`} target="_blank">
                         <i className="bi bi-whatsapp"></i>
                         {`${element}`}
                       </a>
@@ -192,13 +203,14 @@ function App() {
                         onClick={() => {
                           deleteHistory(element);
                         }}
-                        class="bi bi-trash"
+                        className="bi bi-trash"
                       ></i>
                     </div>
                   </div>
                 );
               })}
             </div>
+            
             <div className="contact">
               <p>
                 Contact{" "}
@@ -207,18 +219,17 @@ function App() {
                     localStorage.setItem("savedContacts", "[]");
                     setYourContacts([]);
                   }}
-                  class="bi bi-trash"
+                  className="bi bi-trash"
                 ></i>
               </p>
               {yourContacts.map((element, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <div>
                       <a
                         href={`http://wa.me/${element.number}`}
                         onClick={onChat}
                         target="_blank"
-                        key={index}
                       >
                         {`Name: ${element.name}`}
                         {`Number: ${element.number}`}
@@ -229,7 +240,7 @@ function App() {
                         onClick={() => {
                           deleteContact(element.name);
                         }}
-                        class="bi bi-trash"
+                        className="bi bi-trash"
                       ></i>
                     </div>
                   </div>
