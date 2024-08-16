@@ -2,10 +2,17 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [number, setNumber] = useState("Phone Number");
+  const [number, setNumber] = useState("");
+  const [previousNumber, setPreviousNumber] = useState(
+    localStorage.getItem("previousNumber")
+  );
 
   function handleOnChange(event) {
     setNumber(event.target.value);
+  }
+
+  function onChat() {
+    localStorage.setItem("previousNumber", number);
   }
 
   return (
@@ -32,7 +39,11 @@ function App() {
                 value={number}
               />
               <button>
-                <a href={`http://wa.me/91${number}`}>
+                <a
+                  onClick={onChat}
+                  target="_blank"
+                  href={`http://wa.me/91${number}`}
+                >
                   <i class="bi bi-whatsapp"></i>Chat on Watsapp
                 </a>
               </button>
@@ -43,7 +54,10 @@ function App() {
             </div>
           </div>
           <div className="card-2">
-            <div className="history">History</div>
+            <div className="history">
+              <p>History</p>
+              <p>{previousNumber}</p>
+            </div>
             <div className="contact">Contact</div>
           </div>
         </div>
